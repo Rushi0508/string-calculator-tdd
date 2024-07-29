@@ -1,5 +1,7 @@
 export class StringCalculator {
-  static add(numbers: string) {
-    if (numbers === "") return 0;
+  static Add(numbers: string) {
+    let result = 0;
+    result += Number(numbers);
+    return result;
   }
 }
