@@ -1,7 +1,12 @@
 export class StringCalculator {
-  static Add(numbers: string) {
+  static add(numbers: string): number {
     let result = 0;
-    result += Number(numbers);
+    const values: string[] = numbers.split(",");
+    let firstNum = Number(values[0]);
+    result += firstNum;
+    if (values[1]) {
+      result += Number(values[1]);
+    }
     return result;
   }
 }
