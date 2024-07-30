@@ -5,6 +5,7 @@ export class StringCalculator {
     let delimiter = ",";
     let newLineDelimiter = "//";
     let negativeNumbers: number[] = [];
+    let maxAllowedNumber: number = 1000;
 
     const lines: string[] = numbers.split(newLine);
 
@@ -25,6 +26,8 @@ export class StringCalculator {
           negativeNumbers.push(Number(lineNumber));
           continue;
         }
+
+        if (Number(lineNumber) > maxAllowedNumber) continue;
 
         result += Number(lineNumber);
       }
