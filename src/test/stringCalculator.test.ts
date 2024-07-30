@@ -17,6 +17,6 @@ describe("String Calculator", () => {
 
   it("should return the sum of multiple numbers when given multiple numbers", () => {
     expect(StringCalculator.add("1,2,3")).toBe(6);
-    expect(StringCalculator.add("20,10,30")).toBe(60);
+    expect(StringCalculator.add("20,10,30,40,0,12,23,45")).toBe(180);
   });
 });
