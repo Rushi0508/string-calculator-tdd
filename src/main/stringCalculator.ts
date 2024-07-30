@@ -12,6 +12,9 @@ export class StringCalculator {
     for (const line of lines) {
       if (line.startsWith(newLineDelimiter)) {
         delimiter = line.substring(newLineDelimiter.length);
+        if (delimiter.startsWith("[")) {
+          delimiter = delimiter.substring(1, delimiter.length - 1);
+        }
         continue;
       }
 

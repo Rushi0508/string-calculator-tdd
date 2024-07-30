@@ -52,4 +52,10 @@ describe("String Calculator", () => {
     expect(StringCalculator.add("1001,2")).toBe(2);
     expect(StringCalculator.add("1000,2")).toBe(1002);
   });
+
+  it("should return the sum of multiple numbers when given multiple numbers with a custom delimiter of any length", () => {
+    expect(StringCalculator.add("//[***]\n1***2***3")).toBe(6);
+    expect(StringCalculator.add("//[||]\n1||2||3")).toBe(6);
+    expect(StringCalculator.add("//[sep]\n2sep3")).toBe(5);
+  });
 });
