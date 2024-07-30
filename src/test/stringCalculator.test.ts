@@ -24,4 +24,9 @@ describe("String Calculator", () => {
     expect(StringCalculator.add("1\n2,3")).toBe(6);
     expect(StringCalculator.add("20\n10\n30\n40\n0\n12\n23\n45")).toBe(180);
   });
+
+  it("should throw an error when given a number with a comma at the end", () => {
+    expect(() => StringCalculator.add("1,")).toThrow("Invalid input!");
+    expect(() => StringCalculator.add("1,\n2,\n3")).toThrow("Invalid input!");
+  });
 });
