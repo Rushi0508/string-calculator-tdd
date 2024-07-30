@@ -4,6 +4,7 @@ export class StringCalculator {
     let newLine = "\n";
     let delimiter = ",";
     let newLineDelimiter = "//";
+    let negativeNumbers: number[] = [];
     const lines: string[] = numbers.split(newLine);
     for (const line of lines) {
       if (line.startsWith(newLineDelimiter)) {
@@ -15,8 +16,17 @@ export class StringCalculator {
       }
       const lineNumbers = line.split(delimiter);
       for (const lineNumber of lineNumbers) {
-        result += Number(lineNumber);
+        if (lineNumber.startsWith("-")) {
+          negativeNumbers.push(Number(lineNumber));
+          continue;
+        }
+        if (negativeNumbers.length === 0) result += Number(lineNumber);
       }
+    }
+    if (negativeNumbers.length > 0) {
+      throw new Error(
+        `negative numbers not allowed ${negativeNumbers.join(", ")}`
+      );
     }
     return result;
   }
