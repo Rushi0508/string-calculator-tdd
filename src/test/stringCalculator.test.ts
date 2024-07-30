@@ -19,4 +19,9 @@ describe("String Calculator", () => {
     expect(StringCalculator.add("1,2,3")).toBe(6);
     expect(StringCalculator.add("20,10,30,40,0,12,23,45")).toBe(180);
   });
+
+  it("should return the sum of multiple numbers when given multiple numbers with new line delimiter", () => {
+    expect(StringCalculator.add("1\n2,3")).toBe(6);
+    expect(StringCalculator.add("20\n10\n30\n40\n0\n12\n23\n45")).toBe(180);
+  });
 });
