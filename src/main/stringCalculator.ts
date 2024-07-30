@@ -2,7 +2,7 @@ export class StringCalculator {
   static add(numbers: string): number {
     let result = 0;
     let newLine = "\n";
-    let delimiter = ",";
+    let delimiters: string[] = [","];
     let newLineDelimiter = "//";
     let negativeNumbers: number[] = [];
     let maxAllowedNumber: number = 1000;
@@ -11,28 +11,40 @@ export class StringCalculator {
 
     for (const line of lines) {
       if (line.startsWith(newLineDelimiter)) {
-        delimiter = line.substring(newLineDelimiter.length);
-        if (delimiter.startsWith("[")) {
-          delimiter = delimiter.substring(1, delimiter.length - 1);
+        const delimiterPart = line.substring(newLineDelimiter.length);
+        if (delimiterPart.startsWith("[")) {
+          const delimiterPattern = /\[([^\]]+)\]/g;
+          let match;
+          delimiters = [];
+
+          while ((match = delimiterPattern.exec(delimiterPart)) !== null) {
+            delimiters.push(match[1]);
+          }
+        } else {
+          delimiters = [delimiterPart];
         }
         continue;
       }
 
-      if (line.endsWith(delimiter)) {
-        throw new Error("Invalid input!");
+      for (const delimiter of delimiters) {
+        if (line.endsWith(delimiter)) {
+          throw new Error("Invalid input!");
+        }
       }
 
-      const lineNumbers = line.split(delimiter);
+      let lineNumbers = [line];
+      delimiters.forEach((delimiter) => {
+        lineNumbers = lineNumbers.flatMap((part) => part.split(delimiter));
+      });
 
       for (const lineNumber of lineNumbers) {
+        let num = Number(lineNumber);
         if (lineNumber.startsWith("-")) {
-          negativeNumbers.push(Number(lineNumber));
+          negativeNumbers.push(num);
           continue;
+        } else if (num <= maxAllowedNumber) {
+          result += num;
         }
-
-        if (Number(lineNumber) > maxAllowedNumber) continue;
-
-        result += Number(lineNumber);
       }
     }
 

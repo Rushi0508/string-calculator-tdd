@@ -58,4 +58,11 @@ describe("String Calculator", () => {
     expect(StringCalculator.add("//[||]\n1||2||3")).toBe(6);
     expect(StringCalculator.add("//[sep]\n2sep3")).toBe(5);
   });
+
+  it("should return the sum of multiple numbers when given multiple numbers with multiple custom delimiters", () => {
+    expect(StringCalculator.add("//[*][%]\n1*2%3")).toBe(6);
+    expect(StringCalculator.add("//[|][#]\n1|2#3")).toBe(6);
+    expect(StringCalculator.add("//[|][#][*]\n1|2#3*4")).toBe(10);
+    expect(StringCalculator.add("//[sep][#][*]\n1sep2#3*4")).toBe(10);
+  });
 });
