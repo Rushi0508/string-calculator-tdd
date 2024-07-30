@@ -1,9 +1,9 @@
 export class StringCalculator {
   static add(numbers: string): number {
-    let result = 0;
-    let newLine = "\n";
+    let result: number = 0;
+    let newLine: string = "\n";
     let delimiters: string[] = [","];
-    let newLineDelimiter = "//";
+    let newLineDelimiter: string = "//";
     let negativeNumbers: number[] = [];
     let maxAllowedNumber: number = 1000;
 
@@ -12,6 +12,7 @@ export class StringCalculator {
     for (const line of lines) {
       if (line.startsWith(newLineDelimiter)) {
         const delimiterPart = line.substring(newLineDelimiter.length);
+
         if (delimiterPart.startsWith("[")) {
           const delimiterPattern = /\[([^\]]+)\]/g;
           let match;
@@ -33,12 +34,13 @@ export class StringCalculator {
       }
 
       let lineNumbers = [line];
-      delimiters.forEach((delimiter) => {
+      delimiters?.forEach((delimiter) => {
         lineNumbers = lineNumbers.flatMap((part) => part.split(delimiter));
       });
 
       for (const lineNumber of lineNumbers) {
         let num = Number(lineNumber);
+
         if (lineNumber.startsWith("-")) {
           negativeNumbers.push(num);
           continue;
